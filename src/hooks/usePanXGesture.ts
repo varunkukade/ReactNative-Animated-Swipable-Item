@@ -16,6 +16,11 @@ import {
 } from '../constants';
 
 export const usePanXGesture = () => {
+  //this is used to make scrollview active with pangesture
+  const initialTouchLocation = useSharedValue<{x: number; y: number} | null>(
+    null,
+  );
+
   const offsetX = useSharedValue(0);
   const startX = useSharedValue(0);
 
@@ -103,6 +108,62 @@ export const usePanXGesture = () => {
   };
 
   const panXGesture = Gesture.Pan()
+    .manualActivation(true)
+    .onBegin(evt => {
+      initialTouchLocation.value = {x: evt.x, y: evt.y};
+    })
+    .onTouchesMove((evt, state) => {
+      // Sanity checks
+      if (!initialTouchLocation.value || !evt.changedTouches.length) {
+        state.fail();
+        return;
+      }
+
+      /*
+      https://github.com/software-mansion/react-native-gesture-handler/issues/1933#issuecomment-1566953466
+      Here we will decide if user is scrolling or swiping item horizontally.
+
+      Case 1 : When user scrolled down the list, x values didn't change and y values changed.
+      Before scroll
+      initialTouchLocation.value.x = 118
+      After scroll
+      evt.changedTouches[0].x = 118
+
+      Before scroll
+      initialTouchLocation.value.y = 14.3
+      After scroll
+      evt.changedTouches[0].y = 15
+
+      Here as only y values changed we can conclude user was scrolling vertically.
+
+      Case 2: When item swiped horizontally right y values didn't change, x values changed
+      Before scroll
+      initialTouchLocation.value.x = 33.3
+      After scroll
+      evt.changedTouches[0].x = 32.6
+
+      Before scroll
+      initialTouchLocation.value.y = 25
+      After scroll
+      evt.changedTouches[0].y = 25
+
+      Here as only x values changed we can conclude user was swiping item horizontally.
+      */
+
+      const xDiff = Math.abs(
+        evt.changedTouches[0].x - initialTouchLocation.value.x,
+      );
+      const yDiff = Math.abs(
+        evt.changedTouches[0].y - initialTouchLocation.value.y,
+      );
+      const isHorizontalPanning = xDiff > yDiff;
+
+      if (isHorizontalPanning) {
+        state.activate();
+      } else {
+        state.fail();
+      }
+    })
     .onStart(e => {
       //set drag direction at start
       const dragX = e.translationX + startX.value;
