@@ -58,7 +58,7 @@ export const usePanXGesture = () => {
   };
 
   const handlePanX = (e: GestureUpdateEvent<PanGestureHandlerEventPayload>) => {
-    ('worklet');
+    'worklet';
     const dragX = startX.value + e.translationX;
     /*
     dragX > 0 -> dragging to right side.
