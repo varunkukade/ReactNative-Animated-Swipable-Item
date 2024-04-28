@@ -2,19 +2,26 @@ import {StyleSheet} from 'react-native';
 import {Color_Pallete, SONG_HEIGHT} from '../constants';
 
 export const styles = StyleSheet.create({
-  itemContainer: {
+  container: {
     height: SONG_HEIGHT,
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    position: 'relative',
+    marginBottom: 10,
+  },
+  itemContainer: {
+    height: '100%',
+    width: '100%',
     position: 'absolute',
+    zIndex: 100,
+    elevation: 100,
+    flexDirection: 'row',
   },
   leftClickContainer: {
-    backgroundColor: 'red',
-    height: SONG_HEIGHT,
     alignItems: 'center',
     justifyContent: 'center',
   },
   imageContainer: {
-    height: SONG_HEIGHT,
     width: '20%',
     alignItems: 'center',
     justifyContent: 'flex-start',

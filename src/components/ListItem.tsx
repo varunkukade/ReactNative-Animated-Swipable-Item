@@ -8,13 +8,21 @@ import {styles} from './ListItem.styles';
 import {usePanXGesture} from '../hooks/usePanXGesture';
 
 export const ListItem = ({item}: TListItem) => {
-  const {panXAnimatedStyles, panXGesture, leftTouchableAnimatedStyles} =
-    usePanXGesture(item);
+  const {
+    panXAnimatedStyles,
+    panXGesture,
+    leftTouchableAnimatedStyles,
+    rightTouchableAnimatedStyles,
+  } = usePanXGesture();
 
   return (
-    <>
+    <Animated.View style={styles.container}>
       <Animated.View
-        style={[styles.leftClickContainer, leftTouchableAnimatedStyles]}>
+        style={[
+          styles.leftClickContainer,
+          leftTouchableAnimatedStyles,
+          {backgroundColor: 'red'},
+        ]}>
         <TouchableOpacity onPress={() => {}}>
           <Text>Left Click</Text>
         </TouchableOpacity>
@@ -38,6 +46,16 @@ export const ListItem = ({item}: TListItem) => {
           </View>
         </Animated.View>
       </GestureDetector>
-    </>
+      <Animated.View
+        style={[
+          styles.leftClickContainer,
+          rightTouchableAnimatedStyles,
+          {backgroundColor: 'cyan'},
+        ]}>
+        <TouchableOpacity onPress={() => {}}>
+          <Text>Right Click</Text>
+        </TouchableOpacity>
+      </Animated.View>
+    </Animated.View>
   );
 };
