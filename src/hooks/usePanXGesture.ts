@@ -1,5 +1,4 @@
 import {
-  runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
@@ -15,7 +14,6 @@ import {
   LEFT_DRAG_BOUNDARY,
   RIGHT_DRAG_BOUNDARY,
 } from '../constants';
-import {useState} from 'react';
 
 export const usePanXGesture = () => {
   const offsetX = useSharedValue(0);
@@ -27,8 +25,7 @@ export const usePanXGesture = () => {
   const rightTouchableStartWidth = useSharedValue(0);
   const rightTouchableWidth = useSharedValue(0);
 
-  const [draggingDirection, setDraggingDirection] =
-    useState<EDraggingDirection>(EDraggingDirection.none);
+  const dragDirectionShared = useSharedValue(EDraggingDirection.none);
 
   const resetOffsets = (duration: number) => {
     'worklet';
@@ -62,21 +59,21 @@ export const usePanXGesture = () => {
 
   const resetDragDirection = () => {
     'worklet';
-    runOnJS(setDraggingDirection)(EDraggingDirection.none);
+    dragDirectionShared.value = EDraggingDirection.none;
   };
 
   const handlePanX = (e: GestureUpdateEvent<PanGestureHandlerEventPayload>) => {
     'worklet';
     const dragX = startX.value + e.translationX;
-    if (dragX > 0 && draggingDirection === EDraggingDirection.right) {
+    if (dragX > 0 && dragDirectionShared.value === EDraggingDirection.right) {
       //drag item to right
-      runOnJS(setDraggingDirection)(EDraggingDirection.right);
+      dragDirectionShared.value = EDraggingDirection.right;
       offsetX.value = dragX;
       leftTouchableWidth.value = leftTouchableStartWidth.value + e.translationX;
     }
-    if (dragX < 0 && draggingDirection === EDraggingDirection.left) {
+    if (dragX < 0 && dragDirectionShared.value === EDraggingDirection.left) {
       //drag item to left
-      runOnJS(setDraggingDirection)(EDraggingDirection.left);
+      dragDirectionShared.value = EDraggingDirection.left;
       offsetX.value = dragX;
       rightTouchableWidth.value =
         rightTouchableStartWidth.value - e.translationX;
@@ -88,17 +85,17 @@ export const usePanXGesture = () => {
   };
 
   const panXGesture = Gesture.Pan()
+    .onStart(e => {
+      const dragX = e.translationX + startX.value;
+      dragDirectionShared.value =
+        dragX > 0
+          ? EDraggingDirection.right
+          : dragX < 0
+          ? EDraggingDirection.left
+          : EDraggingDirection.none;
+    })
     .onUpdate(e => {
       handlePanX(e);
-    })
-    .onStart(e => {
-      runOnJS(setDraggingDirection)(
-        e.translationX > 0
-          ? EDraggingDirection.right
-          : e.translationX < 0
-          ? EDraggingDirection.left
-          : EDraggingDirection.none,
-      );
     })
     .onEnd(() => {
       if (offsetX.value >= RIGHT_DRAG_BOUNDARY) {
