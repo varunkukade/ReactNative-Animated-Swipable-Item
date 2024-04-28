@@ -27,7 +27,7 @@ export const usePanXGesture = () => {
 
   const dragDirectionShared = useSharedValue(EDraggingDirection.none);
 
-  const resetOffsets = (duration: number) => {
+  const resetOffsets = (duration?: number) => {
     'worklet';
     if (duration) {
       offsetX.value = withTiming(0, {duration});
@@ -57,28 +57,46 @@ export const usePanXGesture = () => {
     rightTouchableStartWidth.value = 0;
   };
 
-  const resetDragDirection = () => {
-    'worklet';
-    dragDirectionShared.value = EDraggingDirection.none;
-  };
-
   const handlePanX = (e: GestureUpdateEvent<PanGestureHandlerEventPayload>) => {
-    'worklet';
+    ('worklet');
     const dragX = startX.value + e.translationX;
-    if (dragX > 0 && dragDirectionShared.value === EDraggingDirection.right) {
-      //drag item to right
-      dragDirectionShared.value = EDraggingDirection.right;
-      offsetX.value = dragX;
-      leftTouchableWidth.value = leftTouchableStartWidth.value + e.translationX;
+    /*
+    dragX > 0 -> dragging to right side.
+    dragX < 0 -> dragging to left side.
+    here in one drag, we want to let user drag only one touchable either left or right
+    he cannot see both touchables in one drag
+    */
+    if (dragDirectionShared.value === EDraggingDirection.right) {
+      if (dragX > 0) {
+        //drag item to right
+        offsetX.value = dragX;
+
+        //increase left touchable width as per the dragged distance
+        leftTouchableWidth.value =
+          leftTouchableStartWidth.value + e.translationX;
+      } else {
+        //while dragging right, if dragged to leftmost end reset values
+        resetOffsets();
+        resetLeftWidth();
+      }
     }
-    if (dragX < 0 && dragDirectionShared.value === EDraggingDirection.left) {
-      //drag item to left
-      dragDirectionShared.value = EDraggingDirection.left;
-      offsetX.value = dragX;
-      rightTouchableWidth.value =
-        rightTouchableStartWidth.value - e.translationX;
+    if (dragDirectionShared.value === EDraggingDirection.left) {
+      if (dragX < 0) {
+        //drag item to left
+        offsetX.value = dragX;
+
+        //increase right touchable width as per the dragged distance
+        rightTouchableWidth.value =
+          rightTouchableStartWidth.value - e.translationX;
+      } else {
+        //while dragging left, if dragged to rightmost end reset values
+        resetOffsets();
+        resetRightWidth();
+      }
     }
+
     if (dragX === 0) {
+      //make all touchable widths 0
       resetRightWidth();
       resetLeftWidth();
     }
@@ -86,6 +104,7 @@ export const usePanXGesture = () => {
 
   const panXGesture = Gesture.Pan()
     .onStart(e => {
+      //set drag direction at start
       const dragX = e.translationX + startX.value;
       dragDirectionShared.value =
         dragX > 0
@@ -99,30 +118,35 @@ export const usePanXGesture = () => {
     })
     .onEnd(() => {
       if (offsetX.value >= RIGHT_DRAG_BOUNDARY) {
+        //if drag is more than defined boundary at right, drag item at the right boundary
         offsetX.value = withTiming(RIGHT_DRAG_BOUNDARY, {
           duration: ANIMATION_DURATION,
         });
         startX.value = RIGHT_DRAG_BOUNDARY;
 
+        //if drag is more than defined boundary at right, make left touchable width same as right boundry
         leftTouchableWidth.value = withTiming(RIGHT_DRAG_BOUNDARY, {
           duration: ANIMATION_DURATION,
         });
         leftTouchableStartWidth.value = RIGHT_DRAG_BOUNDARY;
       } else if (offsetX.value <= LEFT_DRAG_BOUNDARY) {
+        //if drag is more than defined boundary at left, drag item at the left boundary
         offsetX.value = withTiming(LEFT_DRAG_BOUNDARY, {
           duration: ANIMATION_DURATION,
         });
         startX.value = LEFT_DRAG_BOUNDARY;
 
+        //if drag is more than defined boundary at left, make left touchable width same as left boundry
         rightTouchableWidth.value = withTiming(-LEFT_DRAG_BOUNDARY, {
           duration: ANIMATION_DURATION,
         });
         rightTouchableStartWidth.value = -LEFT_DRAG_BOUNDARY;
       } else {
+        //reset all values
         resetOffsets(ANIMATION_DURATION);
         resetLeftWidth(ANIMATION_DURATION);
         resetRightWidth(ANIMATION_DURATION);
-        resetDragDirection();
+        dragDirectionShared.value = EDraggingDirection.none;
       }
     });
 
