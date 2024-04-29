@@ -9,7 +9,7 @@ import {usePanXGesture} from '../hooks/usePanXGesture';
 import {getRandomColor} from '../helpers';
 import {Color_Pallete, ETouchableType} from '../constants';
 
-export const ListItem = ({item}: TListItem) => {
+export const ListItem = ({item, deleteItem}: TListItem) => {
   const totalLeftTouchableWidth = item.leftTouchables?.reduce(
     (acc, touchable) => acc + touchable.width,
     0,
@@ -23,7 +23,8 @@ export const ListItem = ({item}: TListItem) => {
   const {panXAnimatedStyles, panXGesture} = usePanXGesture(
     totalLeftTouchableWidth,
     totalRightTouchableWidth,
-    item.type,
+    item,
+    deleteItem,
   );
 
   return (
@@ -31,12 +32,12 @@ export const ListItem = ({item}: TListItem) => {
       {item.type === ETouchableType['left-touchable'] ||
       item.type === ETouchableType['left-right-touchable'] ? (
         <Animated.View style={styles.touchableContainer}>
-          {item.leftTouchables.map(eachTouchable => {
+          {item.leftTouchables?.map(eachTouchable => {
             return (
               <Animated.View
                 key={eachTouchable.id}
                 style={[
-                  styles.leftClickContainer,
+                  styles.leftContainer,
                   {
                     backgroundColor: getRandomColor(),
                     width: eachTouchable.width,
@@ -50,6 +51,16 @@ export const ListItem = ({item}: TListItem) => {
               </Animated.View>
             );
           })}
+        </Animated.View>
+      ) : null}
+      {item.type === ETouchableType['swipe-right-to-delete'] ? (
+        <Animated.View
+          style={[
+            styles.leftContainer,
+            styles.deleteContainer,
+            styles.leftDelete,
+          ]}>
+          <Text style={{color: Color_Pallete.crystal_white}}>{'Delete'}</Text>
         </Animated.View>
       ) : null}
 
@@ -75,13 +86,13 @@ export const ListItem = ({item}: TListItem) => {
       {item.type === ETouchableType['right-touchable'] ||
       item.type === ETouchableType['left-right-touchable'] ? (
         <Animated.View
-          style={[styles.touchableContainer, styles.rightTouchableContainer]}>
-          {item.rightTouchables.map(eachTouchable => {
+          style={[styles.touchableContainer, styles.rightContainer]}>
+          {item.rightTouchables?.map(eachTouchable => {
             return (
               <Animated.View
                 key={eachTouchable.id}
                 style={[
-                  styles.leftClickContainer,
+                  styles.leftContainer,
                   {
                     backgroundColor: getRandomColor(),
                     width: eachTouchable.width,
@@ -93,6 +104,16 @@ export const ListItem = ({item}: TListItem) => {
               </Animated.View>
             );
           })}
+        </Animated.View>
+      ) : null}
+      {item.type === ETouchableType['swipe-left-to-delete'] ? (
+        <Animated.View
+          style={[
+            styles.rightContainer,
+            styles.deleteContainer,
+            styles.rightDelete,
+          ]}>
+          <Text style={{color: Color_Pallete.crystal_white}}>{'Delete'}</Text>
         </Animated.View>
       ) : null}
     </Animated.View>

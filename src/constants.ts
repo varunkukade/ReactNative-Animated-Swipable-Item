@@ -1,3 +1,6 @@
+import {Dimensions} from 'react-native';
+import {TItem} from './types';
+
 export const SONG_HEIGHT = 80;
 export enum ETouchableType {
   'left-touchable',
@@ -6,7 +9,7 @@ export enum ETouchableType {
   'swipe-right-to-delete',
   'swipe-left-to-delete',
 }
-export const SONGS = [
+export const SONGS: TItem[] = [
   {
     id: 0,
     title: 'Hymn for the Weekend',
@@ -94,6 +97,7 @@ export const SONGS = [
     singer: 'Coldplay',
     imageSrc:
       'https://i.scdn.co/image/ab67616d0000b273e5a95573f1b91234630fd2cf',
+    type: ETouchableType['swipe-right-to-delete'],
   },
   {
     id: 4,
@@ -101,6 +105,7 @@ export const SONGS = [
     singer: 'Coldplay',
     imageSrc:
       'https://i.scdn.co/image/ab67616d0000b273de09e02aa7febf30b7c02d82',
+    type: ETouchableType['swipe-left-to-delete'],
   },
   {
     id: 5,
@@ -189,6 +194,7 @@ export const Color_Pallete = {
 };
 
 export const SCREEN_PADDING = 10;
+export const ITEM_WIDTH = Dimensions.get('window').width - SCREEN_PADDING * 2;
 
 export const ANIMATION_DURATION = 200;
 

@@ -11,12 +11,13 @@ export type TItem = {
   title: string;
   singer: string;
   imageSrc: string;
-  leftTouchables: TTouchable[];
-  rightTouchables: TTouchable[];
-  type: ETouchableType;
+  leftTouchables?: TTouchable[];
+  rightTouchables?: TTouchable[];
+  type?: ETouchableType;
 };
 
 export type TListItem = {
   item: TItem;
+  deleteItem: (id: number) => void;
 };
 export type NullableNumber = null | number;

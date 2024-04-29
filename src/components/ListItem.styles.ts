@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {Color_Pallete, SONG_HEIGHT} from '../constants';
+import {Color_Pallete, ITEM_WIDTH, SONG_HEIGHT} from '../constants';
 
 export const styles = StyleSheet.create({
   container: {
@@ -16,10 +16,23 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: Color_Pallete.metal_black,
   },
-  leftClickContainer: {
+  leftContainer: {
     alignItems: 'center',
     justifyContent: 'center',
     height: '100%',
+  },
+  deleteContainer: {
+    backgroundColor: 'red',
+    width: ITEM_WIDTH,
+  },
+  leftDelete: {
+    alignItems: 'flex-start',
+    paddingLeft: 20,
+  },
+  rightDelete: {
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+    paddingRight: 20,
   },
   imageContainer: {
     width: '20%',
@@ -45,5 +58,5 @@ export const styles = StyleSheet.create({
   touchableContainer: {
     flexDirection: 'row',
   },
-  rightTouchableContainer: {right: 0, position: 'absolute', height: '100%'},
+  rightContainer: {right: 0, position: 'absolute', height: '100%'},
 });

@@ -1,4 +1,5 @@
 import {
+  runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
@@ -12,12 +13,16 @@ import {
   ANIMATION_DURATION,
   EDraggingDirection,
   ETouchableType,
+  ITEM_WIDTH,
+  SCREEN_PADDING,
 } from '../constants';
+import {TItem} from '../types';
 
 export const usePanXGesture = (
-  totalLeftTouchableWidth: number,
-  totalRightTouchableWidth: number,
-  type: ETouchableType,
+  totalLeftTouchableWidth: number | undefined,
+  totalRightTouchableWidth: number | undefined,
+  item: TItem,
+  deleteItem: (id: number) => void,
 ) => {
   //this is used to make scrollview active with pangesture
   const initialTouchLocation = useSharedValue<{
@@ -26,15 +31,17 @@ export const usePanXGesture = (
   } | null>(null);
 
   const doesLeftTouchableExist =
-    type === ETouchableType['left-touchable'] ||
-    type === ETouchableType['left-right-touchable'];
+    (item.type === ETouchableType['left-touchable'] ||
+      item.type === ETouchableType['left-right-touchable']) &&
+    totalLeftTouchableWidth;
   const doesRightTouchableExist =
-    type === ETouchableType['right-touchable'] ||
-    type === ETouchableType['left-right-touchable'];
+    (item.type === ETouchableType['right-touchable'] ||
+      item.type === ETouchableType['left-right-touchable']) &&
+    totalRightTouchableWidth;
   const doesSwipeLeftToDeleteExist =
-    type === ETouchableType['swipe-left-to-delete'];
+    item.type === ETouchableType['swipe-left-to-delete'];
   const doesSwipeRightToDeleteExist =
-    type === ETouchableType['swipe-right-to-delete'];
+    item.type === ETouchableType['swipe-right-to-delete'];
 
   const offsetX = useSharedValue(0);
   const startX = useSharedValue(0);
@@ -181,29 +188,78 @@ export const usePanXGesture = (
     .onEnd(() => {
       if (dragDirectionShared.value === EDraggingDirection.right) {
         //moving to right side
-        if (offsetX.value >= totalLeftTouchableWidth / 2) {
-          //move to right drag boundary
-          offsetX.value = withTiming(totalLeftTouchableWidth, {
-            duration: ANIMATION_DURATION,
-          });
-          startX.value = totalLeftTouchableWidth;
-        } else if (offsetX.value < totalLeftTouchableWidth / 2) {
-          //move to leftmost end
-          resetOffsets(ANIMATION_DURATION);
+
+        if (doesLeftTouchableExist) {
+          if (offsetX.value >= totalLeftTouchableWidth / 2) {
+            //move to right drag boundary
+            offsetX.value = withTiming(totalLeftTouchableWidth, {
+              duration: ANIMATION_DURATION,
+            });
+            startX.value = totalLeftTouchableWidth;
+          } else if (offsetX.value < totalLeftTouchableWidth / 2) {
+            //move to leftmost end
+            resetOffsets(ANIMATION_DURATION);
+          }
+        }
+
+        if (doesSwipeRightToDeleteExist) {
+          if (offsetX.value >= ITEM_WIDTH / 2) {
+            //move to rightmost side and remove item
+            offsetX.value = withTiming(
+              ITEM_WIDTH + SCREEN_PADDING,
+              {
+                duration: ANIMATION_DURATION,
+              },
+              () => {
+                runOnJS(deleteItem)(item.id);
+              },
+            );
+            startX.value = ITEM_WIDTH + SCREEN_PADDING;
+          } else if (offsetX.value < ITEM_WIDTH / 2) {
+            //move to leftmost end
+            resetOffsets(ANIMATION_DURATION);
+          }
         }
       } else if (dragDirectionShared.value === EDraggingDirection.left) {
         //moving to left side
-        if (getLeftPanX(offsetX.value) >= totalRightTouchableWidth / 2) {
-          //move to left drag boundary
 
-          //we set -totalRightTouchableWidth, as moving from left to right, values should be negative.
-          offsetX.value = withTiming(-totalRightTouchableWidth, {
-            duration: ANIMATION_DURATION,
-          });
-          startX.value = -totalRightTouchableWidth;
-        } else if (getLeftPanX(offsetX.value) < totalRightTouchableWidth / 2) {
-          //move to rightmost end
-          resetOffsets(ANIMATION_DURATION);
+        if (doesRightTouchableExist) {
+          if (getLeftPanX(offsetX.value) >= totalRightTouchableWidth / 2) {
+            //move to left drag boundary
+
+            //we set -totalRightTouchableWidth, as moving from left to right, values should be negative.
+            offsetX.value = withTiming(-totalRightTouchableWidth, {
+              duration: ANIMATION_DURATION,
+            });
+            startX.value = -totalRightTouchableWidth;
+          } else if (
+            getLeftPanX(offsetX.value) <
+            totalRightTouchableWidth / 2
+          ) {
+            //move to rightmost end
+            resetOffsets(ANIMATION_DURATION);
+          }
+        }
+
+        if (doesSwipeLeftToDeleteExist) {
+          if (getLeftPanX(offsetX.value) >= ITEM_WIDTH / 2) {
+            //move to leftmost end and remove item
+
+            //we set -ITEM_WIDTH+ SCREEN_PADDING, as moving from left to right, values should be negative.
+            offsetX.value = withTiming(
+              -(ITEM_WIDTH + SCREEN_PADDING),
+              {
+                duration: ANIMATION_DURATION,
+              },
+              () => {
+                runOnJS(deleteItem)(item.id);
+              },
+            );
+            startX.value = -(ITEM_WIDTH + SCREEN_PADDING);
+          } else if (getLeftPanX(offsetX.value) < ITEM_WIDTH / 2) {
+            //move to rightmost end
+            resetOffsets(ANIMATION_DURATION);
+          }
         }
       } else {
         //reset all values
