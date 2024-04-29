@@ -11,16 +11,30 @@ import {
 import {
   ANIMATION_DURATION,
   EDraggingDirection,
-  LeftTouchableWidth,
-  RightTouchableWidth,
+  ETouchableType,
 } from '../constants';
 
-export const usePanXGesture = () => {
+export const usePanXGesture = (
+  totalLeftTouchableWidth: number,
+  totalRightTouchableWidth: number,
+  type: ETouchableType,
+) => {
   //this is used to make scrollview active with pangesture
   const initialTouchLocation = useSharedValue<{
     x: number;
     y: number;
   } | null>(null);
+
+  const doesLeftTouchableExist =
+    type === ETouchableType['left-touchable'] ||
+    type === ETouchableType['left-right-touchable'];
+  const doesRightTouchableExist =
+    type === ETouchableType['right-touchable'] ||
+    type === ETouchableType['left-right-touchable'];
+  const doesSwipeLeftToDeleteExist =
+    type === ETouchableType['swipe-left-to-delete'];
+  const doesSwipeRightToDeleteExist =
+    type === ETouchableType['swipe-right-to-delete'];
 
   const offsetX = useSharedValue(0);
   const startX = useSharedValue(0);
@@ -51,11 +65,14 @@ export const usePanXGesture = () => {
     dragX > 0 -> dragging to right side.
     dragX < 0 -> dragging to left side.
     here in one drag, we want to let user drag only one touchable either left or right
-    he cannot see both touchables in one drag
+    User cannot see both touchables in one drag
     */
     if (dragDirectionShared.value === EDraggingDirection.right) {
+      if (!doesLeftTouchableExist && !doesSwipeRightToDeleteExist) {
+        return;
+      }
       if (dragX > 0) {
-        if (dragX > LeftTouchableWidth) {
+        if (doesLeftTouchableExist && dragX > totalLeftTouchableWidth) {
           return;
         }
         //drag item to right
@@ -66,8 +83,14 @@ export const usePanXGesture = () => {
       }
     }
     if (dragDirectionShared.value === EDraggingDirection.left) {
+      if (!doesRightTouchableExist && !doesSwipeLeftToDeleteExist) {
+        return;
+      }
       if (dragX < 0) {
-        if (getLeftPanX(dragX) > RightTouchableWidth) {
+        if (
+          doesRightTouchableExist &&
+          getLeftPanX(dragX) > totalRightTouchableWidth
+        ) {
           return;
         }
         //drag item to left
@@ -158,27 +181,27 @@ export const usePanXGesture = () => {
     .onEnd(() => {
       if (dragDirectionShared.value === EDraggingDirection.right) {
         //moving to right side
-        if (offsetX.value >= LeftTouchableWidth / 2) {
+        if (offsetX.value >= totalLeftTouchableWidth / 2) {
           //move to right drag boundary
-          offsetX.value = withTiming(LeftTouchableWidth, {
+          offsetX.value = withTiming(totalLeftTouchableWidth, {
             duration: ANIMATION_DURATION,
           });
-          startX.value = LeftTouchableWidth;
-        } else if (offsetX.value < LeftTouchableWidth / 2) {
+          startX.value = totalLeftTouchableWidth;
+        } else if (offsetX.value < totalLeftTouchableWidth / 2) {
           //move to leftmost end
           resetOffsets(ANIMATION_DURATION);
         }
       } else if (dragDirectionShared.value === EDraggingDirection.left) {
         //moving to left side
-        if (getLeftPanX(offsetX.value) >= RightTouchableWidth / 2) {
+        if (getLeftPanX(offsetX.value) >= totalRightTouchableWidth / 2) {
           //move to left drag boundary
 
-          //we set -RightTouchableWidth, as moving from left to right, values should be negative.
-          offsetX.value = withTiming(-RightTouchableWidth, {
+          //we set -totalRightTouchableWidth, as moving from left to right, values should be negative.
+          offsetX.value = withTiming(-totalRightTouchableWidth, {
             duration: ANIMATION_DURATION,
           });
-          startX.value = -RightTouchableWidth;
-        } else if (getLeftPanX(offsetX.value) < RightTouchableWidth / 2) {
+          startX.value = -totalRightTouchableWidth;
+        } else if (getLeftPanX(offsetX.value) < totalRightTouchableWidth / 2) {
           //move to rightmost end
           resetOffsets(ANIMATION_DURATION);
         }
@@ -199,22 +222,8 @@ export const usePanXGesture = () => {
     };
   }, []);
 
-  const leftTouchableAnimatedStyles = useAnimatedStyle(() => {
-    return {
-      width: LeftTouchableWidth,
-    };
-  }, []);
-
-  const rightTouchableAnimatedStyles = useAnimatedStyle(() => {
-    return {
-      width: RightTouchableWidth,
-    };
-  }, []);
-
   return {
     panXAnimatedStyles,
     panXGesture,
-    leftTouchableAnimatedStyles,
-    rightTouchableAnimatedStyles,
   };
 };

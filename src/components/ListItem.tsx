@@ -6,27 +6,53 @@ import Animated from 'react-native-reanimated';
 import {TListItem} from '../types';
 import {styles} from './ListItem.styles';
 import {usePanXGesture} from '../hooks/usePanXGesture';
+import {getRandomColor} from '../helpers';
+import {Color_Pallete, ETouchableType} from '../constants';
 
 export const ListItem = ({item}: TListItem) => {
-  const {
-    panXAnimatedStyles,
-    panXGesture,
-    leftTouchableAnimatedStyles,
-    rightTouchableAnimatedStyles,
-  } = usePanXGesture();
+  const totalLeftTouchableWidth = item.leftTouchables?.reduce(
+    (acc, touchable) => acc + touchable.width,
+    0,
+  );
+
+  const totalRightTouchableWidth = item.rightTouchables?.reduce(
+    (acc, touchable) => acc + touchable.width,
+    0,
+  );
+
+  const {panXAnimatedStyles, panXGesture} = usePanXGesture(
+    totalLeftTouchableWidth,
+    totalRightTouchableWidth,
+    item.type,
+  );
 
   return (
     <Animated.View style={styles.container}>
-      <Animated.View
-        style={[
-          styles.leftClickContainer,
-          leftTouchableAnimatedStyles,
-          {backgroundColor: 'red'},
-        ]}>
-        <TouchableOpacity onPress={() => {}}>
-          <Text>Left Click</Text>
-        </TouchableOpacity>
-      </Animated.View>
+      {item.type === ETouchableType['left-touchable'] ||
+      item.type === ETouchableType['left-right-touchable'] ? (
+        <Animated.View style={styles.touchableContainer}>
+          {item.leftTouchables.map(eachTouchable => {
+            return (
+              <Animated.View
+                key={eachTouchable.id}
+                style={[
+                  styles.leftClickContainer,
+                  {
+                    backgroundColor: getRandomColor(),
+                    width: eachTouchable.width,
+                  },
+                ]}>
+                <TouchableOpacity onPress={() => {}}>
+                  <Text style={{color: Color_Pallete.metal_black}}>
+                    {eachTouchable.title}
+                  </Text>
+                </TouchableOpacity>
+              </Animated.View>
+            );
+          })}
+        </Animated.View>
+      ) : null}
+
       <GestureDetector gesture={panXGesture}>
         <Animated.View
           key={item.id}
@@ -46,16 +72,29 @@ export const ListItem = ({item}: TListItem) => {
           </View>
         </Animated.View>
       </GestureDetector>
-      <Animated.View
-        style={[
-          styles.leftClickContainer,
-          rightTouchableAnimatedStyles,
-          {backgroundColor: 'cyan'},
-        ]}>
-        <TouchableOpacity onPress={() => {}}>
-          <Text>Right Click</Text>
-        </TouchableOpacity>
-      </Animated.View>
+      {item.type === ETouchableType['right-touchable'] ||
+      item.type === ETouchableType['left-right-touchable'] ? (
+        <Animated.View
+          style={[styles.touchableContainer, styles.rightTouchableContainer]}>
+          {item.rightTouchables.map(eachTouchable => {
+            return (
+              <Animated.View
+                key={eachTouchable.id}
+                style={[
+                  styles.leftClickContainer,
+                  {
+                    backgroundColor: getRandomColor(),
+                    width: eachTouchable.width,
+                  },
+                ]}>
+                <TouchableOpacity onPress={() => {}}>
+                  <Text>{eachTouchable.title}</Text>
+                </TouchableOpacity>
+              </Animated.View>
+            );
+          })}
+        </Animated.View>
+      ) : null}
     </Animated.View>
   );
 };

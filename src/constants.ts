@@ -1,6 +1,11 @@
-import {Dimensions} from 'react-native';
-
 export const SONG_HEIGHT = 80;
+export enum ETouchableType {
+  'left-touchable',
+  'right-touchable',
+  'left-right-touchable',
+  'swipe-right-to-delete',
+  'swipe-left-to-delete',
+}
 export const SONGS = [
   {
     id: 0,
@@ -8,6 +13,19 @@ export const SONGS = [
     singer: 'Coldplay',
     imageSrc:
       'https://i.scdn.co/image/ab67616d0000b2738ff7c3580d429c8212b9a3b6',
+    leftTouchables: [
+      {
+        id: 0,
+        title: 'Left1',
+        width: 60,
+      },
+      {
+        id: 1,
+        title: 'Left2',
+        width: 40,
+      },
+    ],
+    type: ETouchableType['left-touchable'],
   },
   {
     id: 1,
@@ -15,12 +33,60 @@ export const SONGS = [
     singer: 'Coldplay',
     imageSrc:
       'https://i.scdn.co/image/ab67616d0000b273de0cd11d7b31c3bd1fd5983d',
+    rightTouchables: [
+      {
+        id: 0,
+        title: 'Right1',
+        width: 40,
+      },
+      {
+        id: 1,
+        title: 'Right2',
+        width: 40,
+      },
+    ],
+    type: ETouchableType['right-touchable'],
   },
   {
     id: 2,
     title: 'Viva La Vida',
     singer: 'Coldplay',
     imageSrc: 'https://i.ytimg.com/vi/dvgZkm1xWPE/maxresdefault.jpg',
+    leftTouchables: [
+      {
+        id: 0,
+        title: 'Left1',
+        width: 60,
+      },
+      {
+        id: 1,
+        title: 'Left2',
+        width: 60,
+      },
+      {
+        id: 2,
+        title: 'Left3',
+        width: 60,
+      },
+    ],
+    rightTouchables: [
+      {
+        id: 0,
+        title: 'Right1',
+        width: 60,
+      },
+      {
+        id: 1,
+        title: 'Right2',
+        width: 60,
+      },
+      {
+        id: 2,
+        title: 'Right3',
+        width: 60,
+      },
+    ],
+    type: ETouchableType['left-right-touchable'],
   },
   {
     id: 3,
@@ -125,10 +191,6 @@ export const Color_Pallete = {
 export const SCREEN_PADDING = 10;
 
 export const ANIMATION_DURATION = 200;
-
-export const ITEM_WIDTH = Dimensions.get('window').width - SCREEN_PADDING * 2;
-export const RightTouchableWidth = ITEM_WIDTH * 0.3;
-export const LeftTouchableWidth = ITEM_WIDTH * 0.3;
 
 export enum EDraggingDirection {
   'left',

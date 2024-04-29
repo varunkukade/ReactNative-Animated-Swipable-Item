@@ -5,7 +5,6 @@ export const styles = StyleSheet.create({
   container: {
     height: SONG_HEIGHT,
     flexDirection: 'row',
-    justifyContent: 'space-between',
     position: 'relative',
   },
   itemContainer: {
@@ -20,6 +19,7 @@ export const styles = StyleSheet.create({
   leftClickContainer: {
     alignItems: 'center',
     justifyContent: 'center',
+    height: '100%',
   },
   imageContainer: {
     width: '20%',
@@ -42,4 +42,8 @@ export const styles = StyleSheet.create({
     height: SONG_HEIGHT - 20,
     width: '97%',
   },
+  touchableContainer: {
+    flexDirection: 'row',
+  },
+  rightTouchableContainer: {right: 0, position: 'absolute', height: '100%'},
 });
