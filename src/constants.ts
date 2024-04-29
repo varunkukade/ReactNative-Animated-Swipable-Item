@@ -127,8 +127,8 @@ export const SCREEN_PADDING = 10;
 export const ANIMATION_DURATION = 200;
 
 export const ITEM_WIDTH = Dimensions.get('window').width - SCREEN_PADDING * 2;
-export const RIGHT_DRAG_BOUNDARY = ITEM_WIDTH * 0.3;
-export const LEFT_DRAG_BOUNDARY = -(ITEM_WIDTH * 0.3);
+export const RightTouchableWidth = ITEM_WIDTH * 0.3;
+export const LeftTouchableWidth = ITEM_WIDTH * 0.3;
 
 export enum EDraggingDirection {
   'left',

@@ -11,24 +11,19 @@ import {
 import {
   ANIMATION_DURATION,
   EDraggingDirection,
-  LEFT_DRAG_BOUNDARY,
-  RIGHT_DRAG_BOUNDARY,
+  LeftTouchableWidth,
+  RightTouchableWidth,
 } from '../constants';
 
 export const usePanXGesture = () => {
   //this is used to make scrollview active with pangesture
-  const initialTouchLocation = useSharedValue<{x: number; y: number} | null>(
-    null,
-  );
+  const initialTouchLocation = useSharedValue<{
+    x: number;
+    y: number;
+  } | null>(null);
 
   const offsetX = useSharedValue(0);
   const startX = useSharedValue(0);
-
-  const leftTouchableStartWidth = useSharedValue(0);
-  const leftTouchableWidth = useSharedValue(0);
-
-  const rightTouchableStartWidth = useSharedValue(0);
-  const rightTouchableWidth = useSharedValue(0);
 
   const dragDirectionShared = useSharedValue(EDraggingDirection.none);
 
@@ -42,24 +37,11 @@ export const usePanXGesture = () => {
     startX.value = 0;
   };
 
-  const resetLeftWidth = (duration?: number) => {
+  const getLeftPanX = (value: number) => {
     'worklet';
-    if (duration) {
-      leftTouchableWidth.value = withTiming(0, {duration});
-    } else {
-      leftTouchableWidth.value = 0;
-    }
-    leftTouchableStartWidth.value = 0;
-  };
-
-  const resetRightWidth = (duration?: number) => {
-    'worklet';
-    if (duration) {
-      rightTouchableWidth.value = withTiming(0, {duration});
-    } else {
-      rightTouchableWidth.value = 0;
-    }
-    rightTouchableStartWidth.value = 0;
+    //in case user drags from right to left, values will always be negative.
+    //in order to avoid dealing with negative values, convert them to positive
+    return -value;
   };
 
   const handlePanX = (e: GestureUpdateEvent<PanGestureHandlerEventPayload>) => {
@@ -73,44 +55,37 @@ export const usePanXGesture = () => {
     */
     if (dragDirectionShared.value === EDraggingDirection.right) {
       if (dragX > 0) {
+        if (dragX > LeftTouchableWidth) {
+          return;
+        }
         //drag item to right
         offsetX.value = dragX;
-
-        //increase left touchable width as per the dragged distance
-        leftTouchableWidth.value =
-          leftTouchableStartWidth.value + e.translationX;
       } else {
         //while dragging right, if dragged to leftmost end reset values
         resetOffsets();
-        resetLeftWidth();
       }
     }
     if (dragDirectionShared.value === EDraggingDirection.left) {
       if (dragX < 0) {
+        if (getLeftPanX(dragX) > RightTouchableWidth) {
+          return;
+        }
         //drag item to left
         offsetX.value = dragX;
-
-        //increase right touchable width as per the dragged distance
-        rightTouchableWidth.value =
-          rightTouchableStartWidth.value - e.translationX;
       } else {
         //while dragging left, if dragged to rightmost end reset values
         resetOffsets();
-        resetRightWidth();
       }
-    }
-
-    if (dragX === 0) {
-      //make all touchable widths 0
-      resetRightWidth();
-      resetLeftWidth();
     }
   };
 
   const panXGesture = Gesture.Pan()
     .manualActivation(true)
-    .onBegin(evt => {
-      initialTouchLocation.value = {x: evt.x, y: evt.y};
+    .onTouchesDown(e => {
+      initialTouchLocation.value = {
+        x: e.changedTouches[0].x,
+        y: e.changedTouches[0].y,
+      };
     })
     .onTouchesMove((evt, state) => {
       // Sanity checks
@@ -120,7 +95,7 @@ export const usePanXGesture = () => {
       }
 
       /*
-      https://github.com/software-mansion/react-native-gesture-handler/issues/1933#issuecomment-1566953466
+      https://github.com/software-mansion/react-native-gesture-handler/issues/1933#issuecomment-2081857102
       Here we will decide if user is scrolling or swiping item horizontally.
 
       Case 1 : When user scrolled down the list, x values didn't change and y values changed.
@@ -148,8 +123,8 @@ export const usePanXGesture = () => {
       evt.changedTouches[0].y = 25
 
       Here as only x values changed we can conclude user was swiping item horizontally.
+      Also I added additional check of isDragging. If user is dragging the item, state will never fail unless user end the drag.
       */
-
       const xDiff = Math.abs(
         evt.changedTouches[0].x - initialTouchLocation.value.x,
       );
@@ -157,11 +132,14 @@ export const usePanXGesture = () => {
         evt.changedTouches[0].y - initialTouchLocation.value.y,
       );
       const isHorizontalPanning = xDiff > yDiff;
-
       if (isHorizontalPanning) {
         state.activate();
       } else {
-        state.fail();
+        if (dragDirectionShared.value === EDraggingDirection.none) {
+          state.fail();
+        } else {
+          state.activate();
+        }
       }
     })
     .onStart(e => {
@@ -178,35 +156,35 @@ export const usePanXGesture = () => {
       handlePanX(e);
     })
     .onEnd(() => {
-      if (offsetX.value >= RIGHT_DRAG_BOUNDARY) {
-        //if drag is more than defined boundary at right, drag item at the right boundary
-        offsetX.value = withTiming(RIGHT_DRAG_BOUNDARY, {
-          duration: ANIMATION_DURATION,
-        });
-        startX.value = RIGHT_DRAG_BOUNDARY;
+      if (dragDirectionShared.value === EDraggingDirection.right) {
+        //moving to right side
+        if (offsetX.value >= LeftTouchableWidth / 2) {
+          //move to right drag boundary
+          offsetX.value = withTiming(LeftTouchableWidth, {
+            duration: ANIMATION_DURATION,
+          });
+          startX.value = LeftTouchableWidth;
+        } else if (offsetX.value < LeftTouchableWidth / 2) {
+          //move to leftmost end
+          resetOffsets(ANIMATION_DURATION);
+        }
+      } else if (dragDirectionShared.value === EDraggingDirection.left) {
+        //moving to left side
+        if (getLeftPanX(offsetX.value) >= RightTouchableWidth / 2) {
+          //move to left drag boundary
 
-        //if drag is more than defined boundary at right, make left touchable width same as right boundry
-        leftTouchableWidth.value = withTiming(RIGHT_DRAG_BOUNDARY, {
-          duration: ANIMATION_DURATION,
-        });
-        leftTouchableStartWidth.value = RIGHT_DRAG_BOUNDARY;
-      } else if (offsetX.value <= LEFT_DRAG_BOUNDARY) {
-        //if drag is more than defined boundary at left, drag item at the left boundary
-        offsetX.value = withTiming(LEFT_DRAG_BOUNDARY, {
-          duration: ANIMATION_DURATION,
-        });
-        startX.value = LEFT_DRAG_BOUNDARY;
-
-        //if drag is more than defined boundary at left, make left touchable width same as left boundry
-        rightTouchableWidth.value = withTiming(-LEFT_DRAG_BOUNDARY, {
-          duration: ANIMATION_DURATION,
-        });
-        rightTouchableStartWidth.value = -LEFT_DRAG_BOUNDARY;
+          //we set -RightTouchableWidth, as moving from left to right, values should be negative.
+          offsetX.value = withTiming(-RightTouchableWidth, {
+            duration: ANIMATION_DURATION,
+          });
+          startX.value = -RightTouchableWidth;
+        } else if (getLeftPanX(offsetX.value) < RightTouchableWidth / 2) {
+          //move to rightmost end
+          resetOffsets(ANIMATION_DURATION);
+        }
       } else {
         //reset all values
         resetOffsets(ANIMATION_DURATION);
-        resetLeftWidth(ANIMATION_DURATION);
-        resetRightWidth(ANIMATION_DURATION);
         dragDirectionShared.value = EDraggingDirection.none;
       }
     });
@@ -223,13 +201,13 @@ export const usePanXGesture = () => {
 
   const leftTouchableAnimatedStyles = useAnimatedStyle(() => {
     return {
-      width: leftTouchableWidth.value,
+      width: LeftTouchableWidth,
     };
   }, []);
 
   const rightTouchableAnimatedStyles = useAnimatedStyle(() => {
     return {
-      width: rightTouchableWidth.value,
+      width: RightTouchableWidth,
     };
   }, []);
 

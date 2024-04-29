@@ -15,6 +15,7 @@ export const styles = StyleSheet.create({
     zIndex: 100,
     elevation: 100,
     flexDirection: 'row',
+    backgroundColor: Color_Pallete.metal_black,
   },
   leftClickContainer: {
     alignItems: 'center',
