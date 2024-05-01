@@ -7,7 +7,7 @@ import {TListItem} from '../types';
 import {styles} from './ListItem.styles';
 import {usePanXGesture} from '../hooks/usePanXGesture';
 import {getRandomColor} from '../helpers';
-import {Color_Pallete, ETouchableType} from '../constants';
+import {Color_Pallete, EAnimationType} from '../constants';
 
 export const ListItem = ({item, deleteItem}: TListItem) => {
   const totalLeftTouchableWidth = item.leftTouchables?.reduce(
@@ -29,8 +29,8 @@ export const ListItem = ({item, deleteItem}: TListItem) => {
 
   return (
     <Animated.View style={styles.container}>
-      {item.type === ETouchableType['left-touchable'] ||
-      item.type === ETouchableType['left-right-touchable'] ? (
+      {item.type === EAnimationType['left-touchable'] ||
+      item.type === EAnimationType['left-right-touchable'] ? (
         <Animated.View style={styles.touchableContainer}>
           {item.leftTouchables?.map(eachTouchable => {
             return (
@@ -53,7 +53,7 @@ export const ListItem = ({item, deleteItem}: TListItem) => {
           })}
         </Animated.View>
       ) : null}
-      {item.type === ETouchableType['swipe-right-to-delete'] ? (
+      {item.type === EAnimationType['swipe-right-to-delete'] ? (
         <Animated.View
           style={[
             styles.leftContainer,
@@ -83,8 +83,8 @@ export const ListItem = ({item, deleteItem}: TListItem) => {
           </View>
         </Animated.View>
       </GestureDetector>
-      {item.type === ETouchableType['right-touchable'] ||
-      item.type === ETouchableType['left-right-touchable'] ? (
+      {item.type === EAnimationType['right-touchable'] ||
+      item.type === EAnimationType['left-right-touchable'] ? (
         <Animated.View
           style={[styles.touchableContainer, styles.rightContainer]}>
           {item.rightTouchables?.map(eachTouchable => {
@@ -106,7 +106,7 @@ export const ListItem = ({item, deleteItem}: TListItem) => {
           })}
         </Animated.View>
       ) : null}
-      {item.type === ETouchableType['swipe-left-to-delete'] ? (
+      {item.type === EAnimationType['swipe-left-to-delete'] ? (
         <Animated.View
           style={[
             styles.rightContainer,

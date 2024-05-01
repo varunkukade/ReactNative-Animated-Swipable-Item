@@ -3,7 +3,7 @@ import { TItem } from './types';
 import { getRandomColor } from './helpers';
 
 export const SONG_HEIGHT = 80;
-export enum ETouchableType {
+export enum EAnimationType {
   'left-touchable',
   'right-touchable',
   'left-right-touchable',
@@ -31,7 +31,7 @@ export const SONGS: TItem[] = [
         bgColor: getRandomColor(),
       },
     ],
-    type: ETouchableType['left-touchable'],
+    type: EAnimationType['left-touchable'],
   },
   {
     id: 1,
@@ -53,7 +53,7 @@ export const SONGS: TItem[] = [
         bgColor: getRandomColor(),
       },
     ],
-    type: ETouchableType['right-touchable'],
+    type: EAnimationType['right-touchable'],
   },
   {
     id: 2,
@@ -100,7 +100,7 @@ export const SONGS: TItem[] = [
         bgColor: getRandomColor(),
       },
     ],
-    type: ETouchableType['left-right-touchable'],
+    type: EAnimationType['left-right-touchable'],
   },
   {
     id: 3,
@@ -108,7 +108,7 @@ export const SONGS: TItem[] = [
     singer: 'Coldplay',
     imageSrc:
       'https://i.scdn.co/image/ab67616d0000b273e5a95573f1b91234630fd2cf',
-    type: ETouchableType['swipe-right-to-delete'],
+    type: EAnimationType['swipe-right-to-delete'],
   },
   {
     id: 4,
@@ -116,7 +116,7 @@ export const SONGS: TItem[] = [
     singer: 'Coldplay',
     imageSrc:
       'https://i.scdn.co/image/ab67616d0000b273de09e02aa7febf30b7c02d82',
-    type: ETouchableType['swipe-left-to-delete'],
+    type: EAnimationType['swipe-left-to-delete'],
   },
   {
     id: 5,

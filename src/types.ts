@@ -1,4 +1,4 @@
-import { ETouchableType } from './constants';
+import { EAnimationType } from './constants';
 
 export type TTouchable = {
   id: number;
@@ -14,7 +14,7 @@ export type TItem = {
   imageSrc: string;
   leftTouchables?: TTouchable[];
   rightTouchables?: TTouchable[];
-  type?: ETouchableType;
+  type?: EAnimationType;
 };
 
 export type TListItem = {

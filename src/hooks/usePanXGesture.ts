@@ -12,7 +12,7 @@ import {
 import {
   ANIMATION_DURATION,
   EDraggingDirection,
-  ETouchableType,
+  EAnimationType,
   ITEM_WIDTH,
   SCREEN_PADDING,
 } from '../constants';
@@ -31,17 +31,17 @@ export const usePanXGesture = (
   } | null>(null);
 
   const doesLeftTouchableExist =
-    (item.type === ETouchableType['left-touchable'] ||
-      item.type === ETouchableType['left-right-touchable']) &&
+    (item.type === EAnimationType['left-touchable'] ||
+      item.type === EAnimationType['left-right-touchable']) &&
     totalLeftTouchableWidth;
   const doesRightTouchableExist =
-    (item.type === ETouchableType['right-touchable'] ||
-      item.type === ETouchableType['left-right-touchable']) &&
+    (item.type === EAnimationType['right-touchable'] ||
+      item.type === EAnimationType['left-right-touchable']) &&
     totalRightTouchableWidth;
   const doesSwipeLeftToDeleteExist =
-    item.type === ETouchableType['swipe-left-to-delete'];
+    item.type === EAnimationType['swipe-left-to-delete'];
   const doesSwipeRightToDeleteExist =
-    item.type === ETouchableType['swipe-right-to-delete'];
+    item.type === EAnimationType['swipe-right-to-delete'];
 
   const offsetX = useSharedValue(0);
   const startX = useSharedValue(0);
