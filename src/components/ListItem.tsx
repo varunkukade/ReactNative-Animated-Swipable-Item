@@ -39,7 +39,7 @@ export const ListItem = ({item, deleteItem}: TListItem) => {
                 style={[
                   styles.leftContainer,
                   {
-                    backgroundColor: getRandomColor(),
+                    backgroundColor: eachTouchable.bgColor || getRandomColor(),
                     width: eachTouchable.width,
                   },
                 ]}>
@@ -94,7 +94,7 @@ export const ListItem = ({item, deleteItem}: TListItem) => {
                 style={[
                   styles.leftContainer,
                   {
-                    backgroundColor: getRandomColor(),
+                    backgroundColor: eachTouchable.bgColor || getRandomColor(),
                     width: eachTouchable.width,
                   },
                 ]}>

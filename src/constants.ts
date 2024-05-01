@@ -1,5 +1,6 @@
-import {Dimensions} from 'react-native';
-import {TItem} from './types';
+import { Dimensions } from 'react-native';
+import { TItem } from './types';
+import { getRandomColor } from './helpers';
 
 export const SONG_HEIGHT = 80;
 export enum ETouchableType {
@@ -21,11 +22,13 @@ export const SONGS: TItem[] = [
         id: 0,
         title: 'Left1',
         width: 60,
+        bgColor: getRandomColor(),
       },
       {
         id: 1,
         title: 'Left2',
         width: 40,
+        bgColor: getRandomColor(),
       },
     ],
     type: ETouchableType['left-touchable'],
@@ -41,11 +44,13 @@ export const SONGS: TItem[] = [
         id: 0,
         title: 'Right1',
         width: 40,
+        bgColor: getRandomColor(),
       },
       {
         id: 1,
         title: 'Right2',
         width: 40,
+        bgColor: getRandomColor(),
       },
     ],
     type: ETouchableType['right-touchable'],
@@ -60,16 +65,19 @@ export const SONGS: TItem[] = [
         id: 0,
         title: 'Left1',
         width: 60,
+        bgColor: getRandomColor(),
       },
       {
         id: 1,
         title: 'Left2',
         width: 60,
+        bgColor: getRandomColor(),
       },
       {
         id: 2,
         title: 'Left3',
         width: 60,
+        bgColor: getRandomColor(),
       },
     ],
     rightTouchables: [
@@ -77,16 +85,19 @@ export const SONGS: TItem[] = [
         id: 0,
         title: 'Right1',
         width: 60,
+        bgColor: getRandomColor(),
       },
       {
         id: 1,
         title: 'Right2',
         width: 60,
+        bgColor: getRandomColor(),
       },
       {
         id: 2,
         title: 'Right3',
         width: 60,
+        bgColor: getRandomColor(),
       },
     ],
     type: ETouchableType['left-right-touchable'],

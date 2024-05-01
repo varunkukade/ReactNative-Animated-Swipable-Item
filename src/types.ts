@@ -1,9 +1,10 @@
-import {ETouchableType} from './constants';
+import { ETouchableType } from './constants';
 
 export type TTouchable = {
   id: number;
   title: string;
   width: number;
+  bgColor?: string
 };
 
 export type TItem = {

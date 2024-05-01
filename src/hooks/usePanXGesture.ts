@@ -16,7 +16,7 @@ import {
   ITEM_WIDTH,
   SCREEN_PADDING,
 } from '../constants';
-import {TItem} from '../types';
+import { TItem } from '../types';
 
 export const usePanXGesture = (
   totalLeftTouchableWidth: number | undefined,
@@ -51,7 +51,7 @@ export const usePanXGesture = (
   const resetOffsets = (duration?: number) => {
     'worklet';
     if (duration) {
-      offsetX.value = withTiming(0, {duration});
+      offsetX.value = withTiming(0, { duration });
     } else {
       offsetX.value = 0;
     }
@@ -179,8 +179,8 @@ export const usePanXGesture = (
         dragX > 0
           ? EDraggingDirection.right
           : dragX < 0
-          ? EDraggingDirection.left
-          : EDraggingDirection.none;
+            ? EDraggingDirection.left
+            : EDraggingDirection.none;
     })
     .onUpdate(e => {
       handlePanX(e);
