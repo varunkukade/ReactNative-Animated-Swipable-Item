@@ -1,10 +1,9 @@
 import React, {memo, useCallback, useState} from 'react';
-import {View} from 'react-native';
+import {FlatList, View} from 'react-native';
 
 import {ListItem} from '../components/ListItem';
 import {SCREEN_PADDING, SONGS} from '../constants';
 import {styles} from './List.styles';
-import Animated from 'react-native-reanimated';
 
 const MemoizedListItem = memo(ListItem);
 
@@ -17,7 +16,7 @@ export const List = () => {
 
   return (
     <View style={styles.listContainer}>
-      <Animated.FlatList
+      <FlatList
         data={songs}
         style={{paddingHorizontal: SCREEN_PADDING}}
         renderItem={({item}) => (
