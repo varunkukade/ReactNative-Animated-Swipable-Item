@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* AnimatedSwipableItemTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* AnimatedSwipableItemTests.m */; };
-		0C80B921A6F3F58F76C31292 /* libPods-AnimatedSwipableItem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-AnimatedSwipableItem.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		7699B88040F8A987B510C191 /* libPods-AnimatedSwipableItem-AnimatedSwipableItemTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-AnimatedSwipableItem-AnimatedSwipableItemTests.a */; };
+		2E8CB51AAD6089803676C348 /* libPods-AnimatedSwipableItem-AnimatedSwipableItemTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB308ACC863B24138CCEC6AF /* libPods-AnimatedSwipableItem-AnimatedSwipableItemTests.a */; };
+		4759A60825CFF620A3749C23 /* libPods-AnimatedSwipableItem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CE49C985F756091BAFCF283 /* libPods-AnimatedSwipableItem.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +30,7 @@
 		00E356EE1AD99517003FC87E /* AnimatedSwipableItemTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AnimatedSwipableItemTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* AnimatedSwipableItemTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnimatedSwipableItemTests.m; sourceTree = "<group>"; };
+		0938E7CA36A48D1DF9FDA9D9 /* Pods-AnimatedSwipableItem-AnimatedSwipableItemTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnimatedSwipableItem-AnimatedSwipableItemTests.debug.xcconfig"; path = "Target Support Files/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* AnimatedSwipableItem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnimatedSwipableItem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = AnimatedSwipableItem/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = AnimatedSwipableItem/AppDelegate.mm; sourceTree = "<group>"; };
@@ -37,13 +38,12 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = AnimatedSwipableItem/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = AnimatedSwipableItem/main.m; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = AnimatedSwipableItem/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		19F6CBCC0A4E27FBF8BF4A61 /* libPods-AnimatedSwipableItem-AnimatedSwipableItemTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AnimatedSwipableItem-AnimatedSwipableItemTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B4392A12AC88292D35C810B /* Pods-AnimatedSwipableItem.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnimatedSwipableItem.debug.xcconfig"; path = "Target Support Files/Pods-AnimatedSwipableItem/Pods-AnimatedSwipableItem.debug.xcconfig"; sourceTree = "<group>"; };
-		5709B34CF0A7D63546082F79 /* Pods-AnimatedSwipableItem.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnimatedSwipableItem.release.xcconfig"; path = "Target Support Files/Pods-AnimatedSwipableItem/Pods-AnimatedSwipableItem.release.xcconfig"; sourceTree = "<group>"; };
-		5B7EB9410499542E8C5724F5 /* Pods-AnimatedSwipableItem-AnimatedSwipableItemTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnimatedSwipableItem-AnimatedSwipableItemTests.debug.xcconfig"; path = "Target Support Files/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests.debug.xcconfig"; sourceTree = "<group>"; };
-		5DCACB8F33CDC322A6C60F78 /* libPods-AnimatedSwipableItem.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AnimatedSwipableItem.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2153F24BA4A2550D21332CE3 /* Pods-AnimatedSwipableItem.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnimatedSwipableItem.debug.xcconfig"; path = "Target Support Files/Pods-AnimatedSwipableItem/Pods-AnimatedSwipableItem.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = AnimatedSwipableItem/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		89C6BE57DB24E9ADA2F236DE /* Pods-AnimatedSwipableItem-AnimatedSwipableItemTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnimatedSwipableItem-AnimatedSwipableItemTests.release.xcconfig"; path = "Target Support Files/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests.release.xcconfig"; sourceTree = "<group>"; };
+		87A7C5C13442C1746CAD441A /* Pods-AnimatedSwipableItem-AnimatedSwipableItemTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnimatedSwipableItem-AnimatedSwipableItemTests.release.xcconfig"; path = "Target Support Files/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests.release.xcconfig"; sourceTree = "<group>"; };
+		9CE49C985F756091BAFCF283 /* libPods-AnimatedSwipableItem.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AnimatedSwipableItem.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB308ACC863B24138CCEC6AF /* libPods-AnimatedSwipableItem-AnimatedSwipableItemTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AnimatedSwipableItem-AnimatedSwipableItemTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E16C25034E498654A185C566 /* Pods-AnimatedSwipableItem.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnimatedSwipableItem.release.xcconfig"; path = "Target Support Files/Pods-AnimatedSwipableItem/Pods-AnimatedSwipableItem.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -52,7 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7699B88040F8A987B510C191 /* libPods-AnimatedSwipableItem-AnimatedSwipableItemTests.a in Frameworks */,
+				2E8CB51AAD6089803676C348 /* libPods-AnimatedSwipableItem-AnimatedSwipableItemTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,7 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C80B921A6F3F58F76C31292 /* libPods-AnimatedSwipableItem.a in Frameworks */,
+				4759A60825CFF620A3749C23 /* libPods-AnimatedSwipableItem.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,8 +102,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				5DCACB8F33CDC322A6C60F78 /* libPods-AnimatedSwipableItem.a */,
-				19F6CBCC0A4E27FBF8BF4A61 /* libPods-AnimatedSwipableItem-AnimatedSwipableItemTests.a */,
+				9CE49C985F756091BAFCF283 /* libPods-AnimatedSwipableItem.a */,
+				AB308ACC863B24138CCEC6AF /* libPods-AnimatedSwipableItem-AnimatedSwipableItemTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -142,10 +142,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B4392A12AC88292D35C810B /* Pods-AnimatedSwipableItem.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-AnimatedSwipableItem.release.xcconfig */,
-				5B7EB9410499542E8C5724F5 /* Pods-AnimatedSwipableItem-AnimatedSwipableItemTests.debug.xcconfig */,
-				89C6BE57DB24E9ADA2F236DE /* Pods-AnimatedSwipableItem-AnimatedSwipableItemTests.release.xcconfig */,
+				2153F24BA4A2550D21332CE3 /* Pods-AnimatedSwipableItem.debug.xcconfig */,
+				E16C25034E498654A185C566 /* Pods-AnimatedSwipableItem.release.xcconfig */,
+				0938E7CA36A48D1DF9FDA9D9 /* Pods-AnimatedSwipableItem-AnimatedSwipableItemTests.debug.xcconfig */,
+				87A7C5C13442C1746CAD441A /* Pods-AnimatedSwipableItem-AnimatedSwipableItemTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -157,12 +157,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "AnimatedSwipableItemTests" */;
 			buildPhases = (
-				A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */,
+				8B5BCEB87061FC4961E662B3 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */,
-				F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */,
+				EC8A288E0D73BFDCAFEBA8B8 /* [CP] Embed Pods Frameworks */,
+				3D572464AA480FE7ECE34308 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -178,13 +178,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "AnimatedSwipableItem" */;
 			buildPhases = (
-				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
+				4D708C837824255ACE48C190 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
-				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
+				FF6A5AA94D88B403FA20BB1D /* [CP] Embed Pods Frameworks */,
+				4EB88AC8166847CE9D96A2B3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -267,46 +267,24 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */ = {
+		3D572464AA480FE7ECE34308 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AnimatedSwipableItem/Pods-AnimatedSwipableItem-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AnimatedSwipableItem/Pods-AnimatedSwipableItem-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AnimatedSwipableItem/Pods-AnimatedSwipableItem-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */ = {
+		4D708C837824255ACE48C190 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -328,24 +306,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
+		4EB88AC8166847CE9D96A2B3 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -362,21 +323,60 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AnimatedSwipableItem/Pods-AnimatedSwipableItem-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */ = {
+		8B5BCEB87061FC4961E662B3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Copy Pods Resources";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EC8A288E0D73BFDCAFEBA8B8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests/Pods-AnimatedSwipableItem-AnimatedSwipableItemTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FF6A5AA94D88B403FA20BB1D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AnimatedSwipableItem/Pods-AnimatedSwipableItem-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AnimatedSwipableItem/Pods-AnimatedSwipableItem-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AnimatedSwipableItem/Pods-AnimatedSwipableItem-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -412,7 +412,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-AnimatedSwipableItem-AnimatedSwipableItemTests.debug.xcconfig */;
+			baseConfigurationReference = 0938E7CA36A48D1DF9FDA9D9 /* Pods-AnimatedSwipableItem-AnimatedSwipableItemTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -439,7 +439,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-AnimatedSwipableItem-AnimatedSwipableItemTests.release.xcconfig */;
+			baseConfigurationReference = 87A7C5C13442C1746CAD441A /* Pods-AnimatedSwipableItem-AnimatedSwipableItemTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -463,7 +463,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-AnimatedSwipableItem.debug.xcconfig */;
+			baseConfigurationReference = 2153F24BA4A2550D21332CE3 /* Pods-AnimatedSwipableItem.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -490,7 +490,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-AnimatedSwipableItem.release.xcconfig */;
+			baseConfigurationReference = E16C25034E498654A185C566 /* Pods-AnimatedSwipableItem.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
